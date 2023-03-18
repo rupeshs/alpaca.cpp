@@ -65,8 +65,11 @@ $ export NDK=<your_ndk_directory>
 $ cmake -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-23 -DCMAKE_C_FLAGS=-march=armv8.4a+dotprod ..
 $ make
 ```
+
 Install [termux](https://play.google.com/store/apps/details?id=com.termux) on your device and run `termux-setup-storage` to get access to your SD card.
 Finally, copy the `llama` binary and the model files to your device storage. Here is a screenshot of an interactive session running on Pixel 7 Pro phone:
+
+![Alpaca running on Pixel 7 pro](https://raw.githubusercontent.com/rupeshs/alpaca.cpp/linux-android-build-support/pixel7pro-alpaca-7b.png)
 
 ## 13B
 
