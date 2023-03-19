@@ -1,6 +1,7 @@
 # Alpaca.cpp
 
-Run a fast ChatGPT-like model locally on your device. The screencast below is not sped up and running on an M2 Macbook Air with 4GB of weights. 
+Run a fast ChatGPT-like model locally on your device. The screencast below is not sped up and running on an M2 Macbook Air with 4GB of weights.
+Build instructions for MaC,Windows,Linux,Android are available.
 
 
 [![asciicast](screencast.gif)](https://asciinema.org/a/dfJ8QXZ4u978Ona59LPEldtKK)
@@ -22,9 +23,16 @@ You can download the weights for `ggml-alpaca-7b-q4.bin` with BitTorrent `magnet
 
 
 Alternatively you can download them with IPFS.
+```
+# any of these will work(curl)
+curl -o ggml-alpaca-7b-q4.bin -C - https://gateway.estuary.tech/gw/ipfs/QmQ1bf2BTnYxq73MFJWu1B7bQ2UD6qG7D7YDCxhTndVkPC
+curl -o ggml-alpaca-7b-q4.bin -C - https://ipfs.io/ipfs/QmQ1bf2BTnYxq73MFJWu1B7bQ2UD6qG7D7YDCxhTndVkPC
+curl -o ggml-alpaca-7b-q4.bin -C - https://cloudflare-ipfs.com/ipfs/QmQ1bf2BTnYxq73MFJWu1B7bQ2UD6qG7D7YDCxhTndVkPC
 
 ```
-# any of these will work
+
+```
+# any of these will work (wget)
 wget -O ggml-alpaca-7b-q4.bin -c https://gateway.estuary.tech/gw/ipfs/QmQ1bf2BTnYxq73MFJWu1B7bQ2UD6qG7D7YDCxhTndVkPC
 wget -O ggml-alpaca-7b-q4.bin -c https://ipfs.io/ipfs/QmQ1bf2BTnYxq73MFJWu1B7bQ2UD6qG7D7YDCxhTndVkPC
 wget -O ggml-alpaca-7b-q4.bin -c https://cloudflare-ipfs.com/ipfs/QmQ1bf2BTnYxq73MFJWu1B7bQ2UD6qG7D7YDCxhTndVkPC
@@ -34,26 +42,39 @@ Save the `ggml-alpaca-7b-q4.bin` file in the same directory as your `./chat` exe
 
 The weights are based on the published fine-tunes from `alpaca-lora`, converted back into a pytorch checkpoint with a [modified script](https://github.com/tloen/alpaca-lora/pull/19) and then quantized with llama.cpp the regular way. 
 
-## Windows Setup
+## Windows
 
 - Download and install CMake: <https://cmake.org/download/>
 - Download and install `git`. If you've never used git before, consider a GUI client like <https://desktop.github.com/>
-- Clone this repo using your git client of choice (for GitHub Desktop, go to File -> Clone repository -> From URL and paste `https://github.com/antimatter15/alpaca.cpp` in as the URL)
+- Clone this repo using your git client of choice (for GitHub Desktop, go to File -> Clone repository -> From URL and paste `https://github.com/rupeshs/alpaca.cpp` in as the URL)
+- Install Visual Studio 2019 or later with C++ support or install Visual C++ build tools 2019.
 - Open a Windows Terminal inside the folder you cloned the repository to
 - Run the following commands one by one:
 
-```ps1
-cmake .
+```
+mkdir build
+cmake -B build .
+cd build
+cmake --build . --config Release
+```
+- Download the weights via any of the links in "Get started" above, and save the file as `ggml-alpaca-7b-q4.bin` in the main Alpaca directory.
+- In the terminal window, run the commands:
+
+- (You can add other launch options like `--n 8` as preferred onto the same line)
+- You can now type to the AI in the terminal and it will reply. Enjoy!
+
+## Linux
+Install the build-essentials and cmake.
+
+To build run the following commands one by one:
+
+```
+mkdir build
+cmake -B build .
+cd build
 cmake --build . --config Release
 ```
 
-- Download the weights via any of the links in "Get started" above, and save the file as `ggml-alpaca-7b-q4.bin` in the main Alpaca directory.
-- In the terminal window, run this command:
-```ps1
-.\Release\chat.exe
-```
-- (You can add other launch options like `--n 8` as preferred onto the same line)
-- You can now type to the AI in the terminal and it will reply. Enjoy!
 
 ## Android
 You can easily run `alpaca.cpp` on Android device with [termux](https://play.google.com/store/apps/details?id=com.termux).
